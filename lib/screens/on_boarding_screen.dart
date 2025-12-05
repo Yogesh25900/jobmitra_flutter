@@ -58,13 +58,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         'Explore thousands of jobs from top companies near you.',
                   ),
                   OnboardPage(
-                    image: 'assets/images/page1.png',
+                    image: 'assets/images/page2.png',
                     title: 'Apply in One Click',
                     subtitle:
                         'Easily submit applications and track your progress.',
                   ),
                   OnboardPage(
-                    image: 'assets/images/page1.png',
+                    image: 'assets/images/page3.png',
                     title: 'Stay Updated',
                     subtitle:
                         'Get real-time updates on job opportunities and interviews.',
