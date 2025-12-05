@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jobmitra_flutter/screens/home_screen.dart';
+import 'package:jobmitra_flutter/screens/signup_screen.dart';
 import '../../widgets/social_login_button.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -22,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               // App Logo
               Container(
                 width: 60,
@@ -35,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
               const Text('JobFinder', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               const Text('Welcome Back', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
               const SizedBox(height: 16),
               const Text(
@@ -76,14 +78,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
               // Login Button
               SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF6C8EFF),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -126,19 +133,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderColor: const Color(0xFF0077B5),
                 textColor: const Color(0xFF0077B5),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
 
               // Sign Up Text
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Don\'t have an account?', style: TextStyle(color: Colors.grey.shade600)),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text('Sign Up', style: TextStyle(color: Color(0xFF6C8EFF), fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    Text(
+      'Don\'t have an account?',
+      style: TextStyle(color: Colors.grey.shade600),
+    ),
+    TextButton(
+      onPressed: () {
+        // Navigate to SignupScreen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SignupScreen()),
+        );
+      },
+      child: const Text(
+        'Sign Up',
+        style: TextStyle(
+          color: Color(0xFF6C8EFF),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ],
+),
+
               const SizedBox(height: 24),
             ],
           ),

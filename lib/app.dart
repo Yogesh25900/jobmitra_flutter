@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobmitra_flutter/screens/dashboard.dart';
-import 'package:jobmitra_flutter/screens/home_screen.dart';
-import 'package:jobmitra_flutter/screens/login_screen.dart';
+import 'package:jobmitra_flutter/screens/splash_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,7 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScreen(),
       theme: ThemeData(primarySwatch: Colors.blue),
 
     );
