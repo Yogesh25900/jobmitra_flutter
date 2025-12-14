@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobmitra_flutter/screens/splash_screen.dart';
+import 'package:jobmitra_flutter/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -9,8 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-      theme: ThemeData(primarySwatch: Colors.blue),
-
+      theme: AppTheme.light,
     );
   }
 }
