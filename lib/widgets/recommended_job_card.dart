@@ -16,94 +16,35 @@ class RecommendedJobCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade200),
-        borderRadius: BorderRadius.circular(12),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/google_logo.png',
-                width: 40,
-                height: 40,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.red,
-                    child: const Icon(
-                      Icons.business,
-                      color: Colors.white,
-                    ),
-                  );
-                },
-              ),
-            ),
+          Image.network(
+            'https://cdn.vectorstock.com/i/500p/37/38/google-logo-icon-vector-58333738.jpg',
+            height: 60,
+            width: 60,
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
+                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
                 Text(
-                  type,
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontSize: 14,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      company,
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '• $location',
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
+                  '$type · $company · $location',
+                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
           ElevatedButton(
             onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey.shade100,
-              foregroundColor: Colors.black,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
+            style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
             child: const Text('Apply'),
-          ),
+          )
         ],
       ),
     );
