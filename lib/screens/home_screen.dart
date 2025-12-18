@@ -1,171 +1,183 @@
 import 'package:flutter/material.dart';
-import 'package:jobmitra_flutter/widgets/bottom_nav_bar.dart';
+import 'package:jobmitra_flutter/widgets/category_chip.dart';
 import 'package:jobmitra_flutter/widgets/job_card.dart';
-import 'package:jobmitra_flutter/widgets/job_category.dart';
 import 'package:jobmitra_flutter/widgets/recommended_job_card.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          'JobMitra',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        leading: Icon(Icons.menu, color: Colors.black87),
+        title: Text('JobMitra', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold)),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.black),
-          onPressed: () {},
-        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.black),
-            onPressed: () {},
-          ),
+          Icon(Icons.notifications_none, color: Colors.black87),
+          SizedBox(width: 12),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        child: ListView(
           children: [
-            // Greeting
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Hello, Yogesh',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
+            SizedBox(height: 12),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(text: 'Hello, ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                  TextSpan(text: 'Nikita ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                  WidgetSpan(
+                    child: Text('👋', style: TextStyle(fontSize: 20)),
+                  )
+                ],
+              ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 4),
             Text(
-              'Find your dream job today.',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.black87),
+              "Find your dream job today.",
+              style: TextStyle(color: Colors.grey[600]),
             ),
-            const SizedBox(height: 24),
-
-            // Search Bar
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.search, color: Colors.grey.shade600),
-                  hintText: 'Search jobs, companies...',
-                  hintStyle: TextStyle(color: Colors.grey.shade600),
-                  border: InputBorder.none,
+            SizedBox(height: 16),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Search jobs, companies...',
+                prefixIcon: Icon(Icons.search),
+                filled: true,
+                fillColor: Colors.deepPurple[50],
+                contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
                 ),
               ),
             ),
-            const SizedBox(height: 15),
-
-            // Job Categories
-         SizedBox(
-  height: 50, // adjust height for JobCategory
-  child: SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: Row(
-      children: const [
-        JobCategory(icon: Icons.code, title: 'Engineering'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.campaign, title: 'Marketing'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.design_services, title: 'Design'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.code, title: 'Engineering'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.campaign, title: 'Marketing'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.design_services, title: 'Design'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.code, title: 'Engineering'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.campaign, title: 'Marketing'),
-        SizedBox(width: 16),
-        JobCategory(icon: Icons.design_services, title: 'Design'),
-      ],
-    ),
-  ),
-),
-
-            const SizedBox(height: 15),
-
-            // Horizontal Job Cards
+            SizedBox(height: 16),
             SizedBox(
-              height: 200,
+              height: 36,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: const [
+                children: [
+                CategoryChip(label: "Engineering", icon: Icons.code),
+                  SizedBox(width: 8),
+
+                CategoryChip(label: "Marketing", icon: Icons.campaign),
+                  SizedBox(width: 8),
+
+                CategoryChip(label: "Design", icon: Icons.design_services),
+                  SizedBox(width: 8),
+
+
+                 
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              height: 150,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
                   JobCard(
-                    title: 'Software Engineer',
-                    company: 'Google Inc. - Remote',
-                    imageUrl: 'assets/images/google_campus.png',
+                    title:  "Software Engineer",
+                    company: "TechCorp Inc. · Remote",
+                   
+                    imageUrl:  "https://www.techmonitor.ai/wp-content/uploads/sites/29/2017/02/shutterstock_552493561.webp",
                   ),
-                  SizedBox(width: 16),
                   JobCard(
-                    title: 'Product Manager',
-                    company: 'Innovate Solutions',
-                    imageUrl: 'assets/images/google_campus.png',
+                   title:  "Product Manager",
+                   company:  "Innovate Solutions",
+                    
+                    imageUrl: "https://www.shutterstock.com/shutterstock/videos/1080279077/thumb/1.jpg?ip=x480"
+                  ),
+                     JobCard(
+                    title: "Data Analyst",
+                    company: "Innovate Solutions",
+                 
+                    imageUrl: "https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2025-11/251118-cloudflare-mb-1340-a3cae0.jpg"
+                  ),   JobCard(
+                    title: "Security Engineer",
+                    company: "Innovate Solutions",
+                    
+                   imageUrl:  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcOPe3Y-08-DvLAzAoZGoqREkOfiY20xgT_w&s"
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 32),
-
-            // Recommended Jobs
+            SizedBox(height: 24),
             Text(
-              'Recommended Jobs',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+              "Recommended Jobs",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            const SizedBox(height: 16),
-            const RecommendedJobCard(
-              company: 'Google Inc',
-              location: 'Remote',
-              title: 'Software Engineer',
-              type: 'Full-time',
-            ),
-            const SizedBox(height: 16),
-            const RecommendedJobCard(
-              company: 'Google Inc',
-              location: 'New York',
-              title: 'Product Manager',
-              type: 'Full-time',
-            ),
-            const SizedBox(height: 16),
-            const RecommendedJobCard(
-              company: 'Google Inc',
-              location: 'California',
-              title: 'UX Designer',
-              type: 'Full-time',
-            ),
-            const SizedBox(height: 16),
+            SizedBox(height: 12),
+            RecommendedJobCard(
+              title: "Software Engineer",
+               type: "Full-time · Remote",
+               company:  "Google Inc.", 
+               location: "Remote"),
+            RecommendedJobCard(
+              title: "Product Manager", 
+              type: "Full-time", 
+              company: "Google Inc.", 
+              location: "New York"),
+            RecommendedJobCard(
+              title: "UX Designer", 
+              type: "Full-time", 
+              company: "Google Inc.", 
+              location: "California"),
+             RecommendedJobCard(
+              title: "Software Engineer", 
+              type: "Full-time · Remote", 
+              company: "Google Inc.",
+              location:  "Remote"),
+
+            RecommendedJobCard(
+              title: "Product Manager", 
+              type: "Full-time", 
+              company: "Google Inc.",
+              location:  "New York"),
+            RecommendedJobCard(
+              title: "UX Designer", 
+              type: "Full-time", 
+              company: "Google Inc.",
+              location:  "California"), 
+              RecommendedJobCard(
+                title: "Software Engineer",
+                type:  "Full-time · Remote", 
+                company: "Google Inc.",
+                location:  "Remote"),
+            RecommendedJobCard(
+              title: "Product Manager", 
+              type: "Full-time", 
+              company: "Google Inc.", 
+              location: "New York"),
+            RecommendedJobCard(
+              title: "UX Designer", 
+              type: "Full-time", 
+              company: "Google Inc.", 
+              location: "California"),
+            SizedBox(height: 24),
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavigation(),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.deepPurple,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.work_outline), label: "Jobs"),
+          BottomNavigationBarItem(icon: Icon(Icons.check_circle_outline), label: "Applied"),
+          BottomNavigationBarItem(icon: Icon(Icons.bookmark_border), label: "Saved"),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: "Profile"),
+        ],
+        currentIndex: 0,
+        onTap: (index) {},
+      ),
     );
   }
 }
