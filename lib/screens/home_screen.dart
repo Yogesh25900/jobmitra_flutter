@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(text: 'Hello, ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-                  TextSpan(text: 'Nikita ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                  TextSpan(text: 'Yogesh ', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
                   WidgetSpan(
                     child: Text('👋', style: TextStyle(fontSize: 20)),
                   )

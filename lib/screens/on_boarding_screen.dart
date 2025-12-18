@@ -33,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: const Text(
                   'Skip',
                   style: TextStyle(
-                    color: Color(0xFF6C8EFF),
+                  
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -83,8 +83,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 SmoothPageIndicator(
                   controller: _controller,
                   count: 3,
-                  effect: const WormEffect(
-                    activeDotColor: Color(0xFF6C8EFF),
+                  effect: WormEffect(
+                    activeDotColor: Theme.of(context).colorScheme.primary,
                     dotColor: Colors.grey,
                     dotHeight: 10,
                     dotWidth: 10,
@@ -107,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C8EFF),
+                  
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),

@@ -36,14 +36,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: const Icon(Icons.business_center_outlined, color: Colors.white, size: 30),
               ),
               const SizedBox(height: 16),
-              const Text('JobFinder', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+              const Text('JobFinder', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               const SizedBox(height: 30),
-              const Text('Welcome Back', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+              const Text('Welcome Back', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
               const Text(
                 'Log in to your account to continue your job search.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, color: Color(0xFF64748B)),
+                style: TextStyle(fontSize: 18,),
               ),
               const SizedBox(height: 40),
 
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {},
                   child: const Text(
                     'Forgot Password?',
-                    style: TextStyle(color: Color(0xFF6C8EFF)),
+                    
                   ),
                 ),
               ),
@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C8EFF),
+                  
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
                   child: const Text(
