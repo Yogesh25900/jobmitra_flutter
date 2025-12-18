@@ -1,193 +1,111 @@
 import 'package:flutter/material.dart';
 
-/// Centralizes app theme definitions for clean architecture layering.
 class AppTheme {
   const AppTheme._();
 
-  // Color Palette
-  static const Color _primaryBlue = Color(0xFF2196F3);
-  static const Color _primaryPurple = Color(0xFF673AB7);
-  static const Color _primaryGreen = Color(0xFF4CAF50);
-  static const Color _darkBackground = Color(0xFF121212);
-  static const Color _darkSurface = Color(0xFF1E1E1E);
+  // Colors
+  static const Color primaryBlue = Color(0xFF2196F3);
+  static const Color primaryPurple = Color(0xFF673AB7);
+  static const Color primaryGreen = Color(0xFF4CAF50);
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
 
-  static ThemeData get light => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        primaryColor: _primaryBlue,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.light(
-          primary: _primaryBlue,
-          secondary: Colors.blueAccent,
-          surface: Colors.white,
-          error: Colors.red,
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
-          elevation: 0,
-          centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black87),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _primaryBlue,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        ),
-        cardTheme: CardThemeData(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.grey[100],
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        ),
+  // Font
+  static const String fontFamily = 'Inter';
+
+  // Helpers
+  static CardThemeData _cardTheme({double elevation = 2, Color? color}) => CardThemeData(
+        elevation: elevation,
+        color: color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       );
 
-  static ThemeData get dark => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        primaryColor: _primaryBlue,
-        scaffoldBackgroundColor: _darkBackground,
-        colorScheme: ColorScheme.dark(
-          primary: _primaryBlue,
-          secondary: Colors.blueAccent,
-          surface: _darkSurface,
-          error: Colors.redAccent,
+  static InputDecorationTheme _inputDecoration({Color? fillColor}) => InputDecorationTheme(
+        filled: true,
+        fillColor: fillColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
         ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      );
+
+  static ThemeData _buildTheme({
+    required Brightness brightness,
+    required Color primary,
+    required Color scaffoldBg,
+    Color? cardColor,
+    Color? inputFill,
+  }) =>
+      ThemeData(
+        useMaterial3: true,
+        brightness: brightness,
+        primaryColor: primary,
+        fontFamily: fontFamily,
+        scaffoldBackgroundColor: scaffoldBg,
+        colorScheme: brightness == Brightness.light
+            ? ColorScheme.light(
+                primary: primary,
+                secondary: primary,
+                surface: cardColor ?? Colors.white,
+              )
+            : ColorScheme.dark(
+                primary: primary,
+                secondary: primary,
+                surface: cardColor ?? darkSurface,
+              ),
         appBarTheme: AppBarTheme(
-          backgroundColor: _darkSurface,
-          foregroundColor: Colors.white,
+          backgroundColor: scaffoldBg,
+          foregroundColor: brightness == Brightness.light ? Colors.black87 : Colors.white,
           elevation: 0,
           centerTitle: true,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: _primaryBlue,
+            backgroundColor: primary,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        ),
-        cardTheme: CardThemeData(
-          elevation: 4,
-          color: _darkSurface,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: _darkSurface,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        ),
-      );
-
-  static ThemeData get purple => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        primaryColor: _primaryPurple,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.light(
-          primary: _primaryPurple,
-          secondary: Colors.deepPurpleAccent,
-          surface: Colors.white,
-          error: Colors.red,
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
-          elevation: 0,
-          centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black87),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _primaryPurple,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
         cardTheme: CardThemeData(
           elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          color: cardColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.deepPurple[50],
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        ),
+        inputDecorationTheme: _inputDecoration(fillColor: inputFill),
       );
 
-  static ThemeData get green => ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.light,
-        primaryColor: _primaryGreen,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.light(
-          primary: _primaryGreen,
-          secondary: Colors.lightGreenAccent,
-          surface: Colors.white,
-          error: Colors.red,
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
-          elevation: 0,
-          centerTitle: true,
-          iconTheme: IconThemeData(color: Colors.black87),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _primaryGreen,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        ),
-        cardTheme: CardThemeData(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.green[50],
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        ),
-      );
+  // Themes
+  static ThemeData light = _buildTheme(
+    brightness: Brightness.light,
+    primary: primaryBlue,
+    scaffoldBg: Colors.white,
+    cardColor: Colors.white,
+    inputFill: Colors.grey[100],
+  );
+
+  static ThemeData dark = _buildTheme(
+    brightness: Brightness.dark,
+    primary: primaryBlue,
+    scaffoldBg: darkBackground,
+    cardColor: darkSurface,
+    inputFill: darkSurface,
+  );
+
+  static ThemeData purple = _buildTheme(
+    brightness: Brightness.light,
+    primary: primaryPurple,
+    scaffoldBg: Colors.white,
+    cardColor: Colors.white,
+    inputFill: Colors.deepPurple[50],
+  );
+
+  static ThemeData green = _buildTheme(
+    brightness: Brightness.light,
+    primary: primaryGreen,
+    scaffoldBg: Colors.white,
+    cardColor: Colors.white,
+    inputFill: Colors.green[50],
+  );
 }
