@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jobmitra_flutter/features/auth/presentation/pages/signup_screen.dart';
+import 'package:jobmitra_flutter/screens/hive_user_screen.dart';
 import 'package:jobmitra_flutter/screens/home_screen.dart';
-import 'package:jobmitra_flutter/screens/login_screen.dart';
+import 'package:jobmitra_flutter/features/auth/presentation/pages/login_screen.dart';
 
 
 class AppRoutes {
@@ -9,6 +10,7 @@ class AppRoutes {
   static const String signup = '/signup';
   static const String login = '/login';
   static const String home = '/home';
+  static const String hiveView = '/hive_view';
 
   // Route generator
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,6 +21,9 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case home:
         return MaterialPageRoute(builder: (_) =>  HomeScreen());
+      case hiveView:
+        // Assuming HiveViewScreen is defined elsewhere
+        return MaterialPageRoute(builder: (_) => const HiveUsersScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

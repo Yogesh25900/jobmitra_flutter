@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'login_screen.dart'; // import your login screen here
+import '../features/auth/presentation/pages/login_screen.dart'; // import your login screen here
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
