@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jobmitra_flutter/widgets/category_chip.dart';
-import 'package:jobmitra_flutter/widgets/job_card.dart';
-import 'package:jobmitra_flutter/widgets/recommended_job_card.dart';
+import 'package:jobmitra_flutter/core/widgets/category_chip.dart';
+import 'package:jobmitra_flutter/core/widgets/job_card.dart';
+import 'package:jobmitra_flutter/core/widgets/recommended_job_card.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

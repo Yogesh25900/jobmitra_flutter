@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobmitra_flutter/screens/splash_screen.dart';
-import 'package:jobmitra_flutter/theme/app_theme.dart';
+import 'package:jobmitra_flutter/app/theme/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

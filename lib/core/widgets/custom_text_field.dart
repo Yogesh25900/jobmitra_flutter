@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final VoidCallback? toggleObscure;
+  final TextEditingController? controller; // optional controller
 
   const CustomTextField({
     super.key,
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     required this.prefixIcon,
     this.obscureText = false,
     this.toggleObscure,
+    this.controller, // not required
   });
 
   @override
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
         border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: TextField(
+        controller: controller, // added controller
         obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hintText,
@@ -31,7 +34,9 @@ class CustomTextField extends StatelessWidget {
           suffixIcon: toggleObscure != null
               ? IconButton(
                   icon: Icon(
-                    obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                    obscureText
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
                     color: const Color(0xFF94A3B8),
                   ),
                   onPressed: toggleObscure,
