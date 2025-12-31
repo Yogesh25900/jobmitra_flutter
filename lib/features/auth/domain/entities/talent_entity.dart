@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class UserEntity extends Equatable {
+class TalentUserEntity extends Equatable {
   final String id;
   final String fname;
   final String lname;
@@ -26,7 +26,7 @@ class UserEntity extends Equatable {
   final UserLinksEntity links;
   final DateTime createdAt;
 
-  const UserEntity({
+  const TalentUserEntity({
     required this.id,
     required this.fname,
     required this.lname,
