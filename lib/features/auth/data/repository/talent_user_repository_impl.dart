@@ -3,7 +3,7 @@ import 'package:jobmitra_flutter/features/auth/domain/entities/usecases/params/t
 import 'package:jobmitra_flutter/features/auth/domain/entities/usecases/params/talent_user_login_params.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/talent_entity.dart';
-import '../../domain/repositories/auth_repository.dart';
+import '../../domain/repositories/talent_repository.dart';
 import '../datasources/local/talent_user_local_datasource.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

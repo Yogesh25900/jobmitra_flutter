@@ -8,7 +8,7 @@ class SignUpFooter extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/signup_page');
+          Navigator.pushNamed(context, '/signup');
         },
         child: RichText(
           text: const TextSpan(

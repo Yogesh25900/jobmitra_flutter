@@ -9,32 +9,83 @@ part 'talent_user_hive_model.g.dart';
 
 @HiveType(typeId: HiveTableConstant.talentTypeId)
 class TalentUserHiveModel extends HiveObject {
-  @HiveField(0) String id;
-  @HiveField(1) String fname;
-  @HiveField(2) String lname;
-  @HiveField(3) String email;
-  @HiveField(4) String dateOfBirth;
-  @HiveField(5) bool isEmailVerified;
-  @HiveField(6) String password;
-  @HiveField(7) String phoneNumber;
-  @HiveField(8) String role;
-  @HiveField(9) bool isEmployer;
-  @HiveField(10) String profilePicturePath;
-  @HiveField(11) String cvPath;
-  @HiveField(12) String googleId;
-  @HiveField(13) String googleProfilePicture;
-  @HiveField(14) String location;
-  @HiveField(15) String title;
-  @HiveField(16) String summary;
-  @HiveField(17) List experiences;
-  @HiveField(18) List education;
-  @HiveField(19) List<String> skills;
-  @HiveField(20) List certifications;
-  @HiveField(21) List portfolio;
-  @HiveField(22) String linkedin;
-  @HiveField(23) String github;
-  @HiveField(24) String portfolioLink;
-  @HiveField(25) DateTime createdAt;
+  @HiveField(0) 
+  String id;
+
+  @HiveField(1) 
+  String fname;
+
+  @HiveField(2) 
+  String lname;
+
+  @HiveField(3) 
+  String email;
+
+  @HiveField(4) 
+  String dateOfBirth;
+
+  @HiveField(5) 
+  bool isEmailVerified;
+
+  @HiveField(6) 
+  String password;
+
+  @HiveField(7) 
+  String phoneNumber;
+
+  @HiveField(8) 
+  String role;
+
+  @HiveField(9) 
+  bool isEmployer;
+
+  @HiveField(10) 
+  String profilePicturePath;
+
+  @HiveField(11) 
+  String cvPath;
+
+  @HiveField(12) 
+  String googleId;
+
+  @HiveField(13) 
+  String googleProfilePicture;
+
+  @HiveField(14) 
+  String location;
+
+  @HiveField(15) 
+  String title;
+
+  @HiveField(16) 
+  String summary;
+
+  @HiveField(17) 
+  List experiences;
+
+  @HiveField(18) 
+  List education;
+  
+  @HiveField(19) 
+  List<String> skills;
+
+  @HiveField(20) 
+  List certifications;
+
+  @HiveField(21) 
+  List portfolio;
+
+  @HiveField(22) 
+  String linkedin;
+
+  @HiveField(23) 
+  String github;
+
+  @HiveField(24) 
+  String portfolioLink;
+  
+  @HiveField(25) 
+  DateTime createdAt;
 
   TalentUserHiveModel({
     String? id,

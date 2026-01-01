@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:jobmitra_flutter/core/constants/hive_table_constant.dart';
 import 'package:jobmitra_flutter/features/auth/data/models/talent_user_hive_model.dart';
+import 'package:jobmitra_flutter/features/auth/data/models/recruiter_hive_model.dart';
 
 
 class HiveService {
@@ -20,11 +21,15 @@ class HiveService {
     if (!Hive.isAdapterRegistered(HiveTableConstant.talentTypeId)) {
       Hive.registerAdapter(TalentUserHiveModelAdapter());
     }
+    if (!Hive.isAdapterRegistered(HiveTableConstant.recruiterTypeId)) {
+      Hive.registerAdapter(RecruiterHiveModelAdapter());
+    }
   }
 
   // Open boxes
   Future<void> openBoxes() async {
     await Hive.openBox<TalentUserHiveModel>(HiveTableConstant.talentTable);
+    await Hive.openBox<RecruiterHiveModel>(HiveTableConstant.recruiterTable);
   }
 
   // Close boxes
@@ -36,7 +41,10 @@ class HiveService {
   Box<TalentUserHiveModel> get _talentBox =>
       Hive.box<TalentUserHiveModel>(HiveTableConstant.talentTable);
 
-  // CRUD methods
+  Box<RecruiterHiveModel> get _recruiterBox =>
+      Hive.box<RecruiterHiveModel>(HiveTableConstant.recruiterTable);
+
+  // CRUD methods for Talent Users
   Future<TalentUserHiveModel> createUser(TalentUserHiveModel user) async {
     await _talentBox.put(user.id, user);
     return user;
@@ -56,5 +64,27 @@ class HiveService {
 
   Future<void> deleteUser(String id) async {
     await _talentBox.delete(id);
+  }
+
+  // CRUD methods for Recruiters
+  Future<RecruiterHiveModel> createRecruiter(RecruiterHiveModel recruiter) async {
+    await _recruiterBox.put(recruiter.id, recruiter);
+    return recruiter;
+  }
+
+  List<RecruiterHiveModel> getAllRecruiters() {
+    return _recruiterBox.values.toList();
+  }
+
+  Future<RecruiterHiveModel?> getRecruiterById(String id) async {
+    return _recruiterBox.get(id);
+  }
+
+  Future<void> updateRecruiter(RecruiterHiveModel recruiter) async {
+    await _recruiterBox.put(recruiter.id, recruiter);
+  }
+
+  Future<void> deleteRecruiter(String id) async {
+    await _recruiterBox.delete(id);
   }
 }

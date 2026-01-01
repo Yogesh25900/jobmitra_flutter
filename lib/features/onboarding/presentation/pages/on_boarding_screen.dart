@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jobmitra_flutter/features/auth/presentation/pages/login_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../features/auth/presentation/pages/login_screen.dart'; // import your login screen here
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -27,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const LoginScreen()),
+                    MaterialPageRoute(builder: (_) => const JobPortalLoginPage()),
                   );
                 },
                 child: const Text(
@@ -97,7 +97,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     if (isLastPage) {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => const LoginScreen()),
+                        MaterialPageRoute(builder: (_) => const JobPortalLoginPage()),
                       );
                     } else {
                       _controller.nextPage(

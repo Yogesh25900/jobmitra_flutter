@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobmitra_flutter/features/auth/presentation/pages/login_page.dart';
-import 'package:jobmitra_flutter/screens/splash_screen.dart';
+import 'package:jobmitra_flutter/features/splash/presentation/pages/splash_screen.dart';
 import 'package:jobmitra_flutter/app/theme/app_theme.dart';
 import 'package:jobmitra_flutter/app/routes/app_routes.dart';
 
@@ -11,7 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: JobPortalLoginPage(),
+      home: SplashScreen(),
       theme: AppTheme.light,
       onGenerateRoute: AppRoutes.generateRoute,
     );

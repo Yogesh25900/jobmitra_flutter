@@ -1,15 +1,16 @@
-// import 'package:dartz/dartz.dart';
-// import '../../../../core/error/failures.dart';
-// import '../entities/user_entity.dart';
-// import '../repositories/auth_repository.dart';
-// import 'params/login_user_params.dart';
+import 'package:dartz/dartz.dart';
+import 'package:jobmitra_flutter/core/error/failures.dart';
+import 'package:jobmitra_flutter/features/auth/domain/entities/talent_entity.dart';
+import 'package:jobmitra_flutter/features/auth/domain/entities/usecases/params/talent_user_login_params.dart';
+import 'package:jobmitra_flutter/features/auth/domain/repositories/talent_repository.dart';
 
-// class LoginUser {
-//   final AuthRepository repository;
 
-//   LoginUser(this.repository);
+class LoginUser {
+  final AuthRepository repository;
 
-//   Future<Either<Failure, UserEntity>> call(LoginUserParams params) {
-//     return repository.loginUser(params);
-//   }
-// }
+  LoginUser(this.repository);
+
+  Future<Either<Failures, TalentUserEntity>> call(TalentUserLoginParams params) {
+    return repository.loginUser(params);
+  }
+}

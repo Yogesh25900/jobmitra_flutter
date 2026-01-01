@@ -17,10 +17,19 @@ class TalentUserLocalDataSourceImpl implements ITalentUserDataSource {
 
   @override
   Future<TalentUserEntity> loginUser(String email, String password) async {
-    final model = userBox.values.firstWhere(
-      (user) => user.email == email && user.password == password,
-      orElse: () => throw Exception("User not found"),
+    // First check if user exists with the given email
+    final userWithEmail = userBox.values.where((user) => user.email == email).toList();
+    
+    if (userWithEmail.isEmpty) {
+      throw Exception("No account found with this email");
+    }
+    
+    // Then check password
+    final model = userWithEmail.firstWhere(
+      (user) => user.password == password,
+      orElse: () => throw Exception("Invalid password"),
     );
+    
     return model.toEntity();
   }
 

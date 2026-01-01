@@ -5,6 +5,7 @@ class InputField extends StatelessWidget {
   final IconData icon;
   final bool obscure;
   final Widget? suffix;
+  final TextEditingController? controller;
 
   const InputField({
     super.key,
@@ -12,11 +13,13 @@ class InputField extends StatelessWidget {
     required this.icon,
     this.obscure = false,
     this.suffix,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
         hintText: hint,
