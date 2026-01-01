@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jobmitra_flutter/features/auth/domain/entities/usecases/params/talent_user_register_params.dart';
 import 'package:jobmitra_flutter/features/auth/presentation/providers/auth_providers.dart';
 import 'package:jobmitra_flutter/features/auth/presentation/state/auth_state.dart';
-import 'package:jobmitra_flutter/features/auth/presentation/pages/login_screen.dart' hide SafeArea;
+import 'package:jobmitra_flutter/features/auth/presentation/pages/login_screen.dart';
 import '../../../../core/widgets/social_login_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 
