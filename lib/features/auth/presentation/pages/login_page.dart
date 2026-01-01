@@ -122,33 +122,10 @@ class _JobPortalLoginPageState extends State<JobPortalLoginPage> {
 
                               const SizedBox(height: 8),
 
-                              SizedBox(
-                                width: double.infinity,
-                                height: 54,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF136DEC),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14),
-                                    ),
-                                    elevation: 6,
-                                  ),
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text(
-                                        "Sign In",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(width: 8),
-                                      Icon(Icons.arrow_forward, size: 18),
-                                    ],
-                                  ),
-                                ),
+                              PrimaryButton(
+                                text: "Sign In",
+                                icon: const Icon(Icons.arrow_forward, size: 18),
+                                onPressed: () {},
                               ),
 
                               const SizedBox(height: 28),

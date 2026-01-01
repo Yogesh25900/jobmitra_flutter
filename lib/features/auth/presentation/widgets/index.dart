@@ -5,3 +5,5 @@ export 'label_text.dart';
 export 'header_image.dart';
 export 'role_switch.dart';
 export 'signup_footer.dart';
+export 'primary_button.dart';
+export 'signup_role_button.dart';

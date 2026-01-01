@@ -6,19 +6,24 @@ class SignUpFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: RichText(
-        text: const TextSpan(
-          text: "Don't have an account? ",
-          style: TextStyle(color: Colors.grey),
-          children: [
-            TextSpan(
-              text: "Sign Up",
-              style: TextStyle(
-                color: Color(0xFF136DEC),
-                fontWeight: FontWeight.bold,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/signup_page');
+        },
+        child: RichText(
+          text: const TextSpan(
+            text: "Don't have an account? ",
+            style: TextStyle(color: Colors.grey),
+            children: [
+              TextSpan(
+                text: "Sign Up",
+                style: TextStyle(
+                  color: Color(0xFF136DEC),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -20,7 +20,11 @@ class InputField extends StatelessWidget {
       obscureText: obscure,
       decoration: InputDecoration(
         hintText: hint,
-        prefixIcon: Icon(icon, color: Colors.grey),
+        hintStyle: TextStyle(
+          color: Colors.grey.shade500,
+          fontWeight: FontWeight.w400,
+        ),
+        prefixIcon: Icon(icon, color: Colors.grey.shade500),
         suffixIcon: suffix,
         filled: true,
         fillColor: Colors.grey.shade100,
