@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:jobmitra_flutter/screens/on_boarding_screen.dart';
+import 'package:jobmitra_flutter/features/onboarding/presentation/pages/on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
