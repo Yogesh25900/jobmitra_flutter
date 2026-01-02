@@ -30,7 +30,7 @@ class AuthViewModel extends Notifier<AuthState> {
   }
 
   Future<void> registerTalentUser(TalentUserRegisterParams params) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(signupStatus: AuthStatus.loading, errorMessage: null);
 
     final Either<Failures, TalentUserEntity> result =
         await _registerTalentUser(params);
@@ -38,13 +38,13 @@ class AuthViewModel extends Notifier<AuthState> {
     result.fold(
       (failure) {
         state = state.copyWith(
-          status: AuthStatus.error,
+          signupStatus: AuthStatus.error,
           errorMessage: failure.message,
         );
       },
       (user) {
         state = state.copyWith(
-          status: AuthStatus.success,
+          signupStatus: AuthStatus.success,
           talentUser: user,
         );
       },
@@ -52,7 +52,7 @@ class AuthViewModel extends Notifier<AuthState> {
   }
 
   Future<void> loginTalentUser(TalentUserLoginParams params) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(loginStatus: AuthStatus.loading, errorMessage: null);
 
     final Either<Failures, TalentUserEntity> result =
         await _loginTalentUser(params);
@@ -60,13 +60,13 @@ class AuthViewModel extends Notifier<AuthState> {
     result.fold(
       (failure) {
         state = state.copyWith(
-          status: AuthStatus.error,
+          loginStatus: AuthStatus.error,
           errorMessage: failure.message,
         );
       },
       (user) {
         state = state.copyWith(
-          status: AuthStatus.success,
+          loginStatus: AuthStatus.success,
           talentUser: user,
         );
       },
@@ -74,7 +74,7 @@ class AuthViewModel extends Notifier<AuthState> {
   }
 
   Future<void> registerRecruiter(RecruiterRegisterParams params) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(signupStatus: AuthStatus.loading, errorMessage: null);
 
     final Either<Failures, RecruiterEntity> result =
         await _registerRecruiter(params);
@@ -82,13 +82,13 @@ class AuthViewModel extends Notifier<AuthState> {
     result.fold(
       (failure) {
         state = state.copyWith(
-          status: AuthStatus.error,
+          signupStatus: AuthStatus.error,
           errorMessage: failure.message,
         );
       },
       (user) {
         state = state.copyWith(
-          status: AuthStatus.success,
+          signupStatus: AuthStatus.success,
           recruiterUser: user,
         );
       },
@@ -96,7 +96,7 @@ class AuthViewModel extends Notifier<AuthState> {
   }
 
   Future<void> loginRecruiter(RecruiterLoginParams params) async {
-    state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
+    state = state.copyWith(loginStatus: AuthStatus.loading, errorMessage: null);
 
     final Either<Failures, RecruiterEntity> result =
         await _loginRecruiter(params);
@@ -104,13 +104,13 @@ class AuthViewModel extends Notifier<AuthState> {
     result.fold(
       (failure) {
         state = state.copyWith(
-          status: AuthStatus.error,
+          loginStatus: AuthStatus.error,
           errorMessage: failure.message,
         );
       },
       (user) {
         state = state.copyWith(
-          status: AuthStatus.success,
+          loginStatus: AuthStatus.success,
           recruiterUser: user,
         );
       },

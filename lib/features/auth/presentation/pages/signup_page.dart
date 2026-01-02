@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobmitra_flutter/features/auth/domain/entities/usecases/params/talent_user_register_params.dart';
 import 'package:jobmitra_flutter/features/auth/domain/entities/usecases/params/recruiter_register_params.dart';
@@ -41,11 +40,11 @@ class _SignupPageState extends ConsumerState<SignupPage> {
   @override
   Widget build(BuildContext context) {
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
-      debugPrint(' SignUp State Changed: ${next.status}');
+      debugPrint(' SignUp State Changed: ${next.signupStatus}');
       
-      if (next.status == AuthStatus.loading) {
+      if (next.signupStatus == AuthStatus.loading) {
         debugPrint(' Registration in progress...');
-      } else if (next.status == AuthStatus.success) {
+      } else if (next.signupStatus == AuthStatus.success && previous?.signupStatus != AuthStatus.success) {
         debugPrint('Registration Successful!');
         showAppSnackBar(
           context,
@@ -53,8 +52,11 @@ class _SignupPageState extends ConsumerState<SignupPage> {
           type: AppSnackBarType.success,
           durationSeconds: 2,
         );
-        Navigator.pushReplacementNamed(context, '/login');
-      } else if (next.status == AuthStatus.error) {
+        // Navigate to login page
+        Future.delayed(const Duration(milliseconds: 1500), () {
+          Navigator.pushReplacementNamed(context, '/login');
+        });
+      } else if (next.signupStatus == AuthStatus.error) {
         final errorMessage = next.errorMessage ?? "Registration failed";
         debugPrint(' Registration Error: $errorMessage');
         
@@ -64,6 +66,11 @@ class _SignupPageState extends ConsumerState<SignupPage> {
       }
     });
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final horizontalPadding = isTablet ? 48.0 : 20.0;
+    final titleSize = isTablet ? 36.0 : 32.0;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -71,7 +78,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
           SafeArea(
             child: Center(
               child: Container(
-                constraints: const BoxConstraints(maxWidth: 420),
+                constraints: BoxConstraints(maxWidth: isTablet ? double.infinity : 420.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -83,41 +90,39 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 ),
                 child: Column(
                   children: [
-                    // ================= TOP BAR =================
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      padding: EdgeInsets.symmetric(horizontal: isTablet ? 24.0 : 12.0),
                       child: Row(
                         children: [
                           IconButton(
                             onPressed: () => Navigator.pop(context),
                             icon: const Icon(Icons.arrow_back),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: Text(
                               "Sign Up",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: isTablet ? 20.0 : 18.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          const SizedBox(width: 48),
+                          SizedBox(width: isTablet ? 56.0 : 48.0),
                         ],
                       ),
                     ),
 
-                    // ================= CONTENT =================
                     Expanded(
                       child: SingleChildScrollView(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 24),
+                        padding: EdgeInsets.fromLTRB(horizontalPadding, 10, horizontalPadding, 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Join the Network",
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: titleSize,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -129,7 +134,6 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
                         const SizedBox(height: 24),
 
-                        // ================= ROLE =================
                         const Text(
                           "I want to...",
                           style: TextStyle(
@@ -164,7 +168,6 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
                         const SizedBox(height: 22),
 
-                        // ================= FORM =================
                         if (isTalent) ...[
                           const LabelText("Full Name"),
                           const SizedBox(height: 6),

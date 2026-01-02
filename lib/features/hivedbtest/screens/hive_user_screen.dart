@@ -175,6 +175,29 @@ class _HiveUsersScreenState extends State<HiveUsersScreen> with SingleTickerProv
                 fontSize: 16,
               ),
             ),
+            trailing: PopupMenuButton(
+              onSelected: (value) {
+                if (value == 'delete') {
+                  _showDeleteConfirmation(
+                    context,
+                    user.fname,
+                    () => _deleteTalentUser(user.id),
+                  );
+                }
+              },
+              itemBuilder: (BuildContext context) => [
+                const PopupMenuItem(
+                  value: 'delete',
+                  child: Row(
+                    children: [
+                      Icon(Icons.delete, color: Colors.red, size: 20),
+                      SizedBox(width: 8),
+                      Text('Delete', style: TextStyle(color: Colors.red)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -325,6 +348,29 @@ class _HiveUsersScreenState extends State<HiveUsersScreen> with SingleTickerProv
                 fontSize: 16,
               ),
             ),
+            trailing: PopupMenuButton(
+              onSelected: (value) {
+                if (value == 'delete') {
+                  _showDeleteConfirmation(
+                    context,
+                    recruiter.companyName,
+                    () => _deleteRecruiter(recruiter.id),
+                  );
+                }
+              },
+              itemBuilder: (BuildContext context) => [
+                const PopupMenuItem(
+                  value: 'delete',
+                  child: Row(
+                    children: [
+                      Icon(Icons.delete, color: Colors.red, size: 20),
+                      SizedBox(width: 8),
+                      Text('Delete', style: TextStyle(color: Colors.red)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -461,5 +507,91 @@ class _HiveUsersScreenState extends State<HiveUsersScreen> with SingleTickerProv
 
   String _formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute.toString().padLeft(2, '0')}';
+  }
+
+  void _showDeleteConfirmation(
+    BuildContext context,
+    String name,
+    VoidCallback onConfirm,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Delete User'),
+        content: Text('Are you sure you want to delete "$name"?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              onConfirm();
+            },
+            child: const Text(
+              'Delete',
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _deleteTalentUser(String userId) async {
+    try {
+      final talentBox = await Hive.openBox<TalentUserHiveModel>(
+        HiveTableConstant.talentTable,
+      );
+      await talentBox.delete(userId);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('User deleted successfully'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        loadAllUsers();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error deleting user: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _deleteRecruiter(String recruiterId) async {
+    try {
+      final recruiterBox = await Hive.openBox<RecruiterHiveModel>(
+        HiveTableConstant.recruiterTable,
+      );
+      await recruiterBox.delete(recruiterId);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Recruiter deleted successfully'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        loadAllUsers();
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error deleting recruiter: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

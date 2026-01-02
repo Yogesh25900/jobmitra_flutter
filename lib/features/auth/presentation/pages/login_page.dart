@@ -32,11 +32,11 @@ class _JobPortalLoginPageState extends ConsumerState<JobPortalLoginPage> {
   @override
   Widget build(BuildContext context) {
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
-      debugPrint(' Login State Changed: ${next.status}');
+      debugPrint(' Login State Changed: ${next.loginStatus}');
       
-      if (next.status == AuthStatus.loading) {
+      if (next.loginStatus == AuthStatus.loading) {
         debugPrint(' Login in progress...');
-      } else if (next.status == AuthStatus.success) {
+      } else if (next.loginStatus == AuthStatus.success && previous?.loginStatus != AuthStatus.success) {
         debugPrint(' Login Successful!');
         showAppSnackBar(
           context,
@@ -45,7 +45,7 @@ class _JobPortalLoginPageState extends ConsumerState<JobPortalLoginPage> {
           durationSeconds: 2,
         );
         Navigator.pushReplacementNamed(context, '/home');
-      } else if (next.status == AuthStatus.error) {
+      } else if (next.loginStatus == AuthStatus.error) {
         final errorMessage = next.errorMessage ?? "Login failed";
         debugPrint(' Login Error: $errorMessage');
         
@@ -55,6 +55,12 @@ class _JobPortalLoginPageState extends ConsumerState<JobPortalLoginPage> {
       }
     });
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final horizontalPadding = isTablet ? 48.0 : 24.0;
+    final headerHeight = isTablet ? 200.0 : 140.0;
+    final titleSize = isTablet ? 32.0 : 28.0;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7F8),
       body: SafeArea(
@@ -62,7 +68,7 @@ class _JobPortalLoginPageState extends ConsumerState<JobPortalLoginPage> {
           children: [
             Center(
               child: Container(
-                constraints: const BoxConstraints(maxWidth: 420),
+                constraints: BoxConstraints(maxWidth: isTablet ? double.infinity : 420.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -80,17 +86,20 @@ class _JobPortalLoginPageState extends ConsumerState<JobPortalLoginPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const HeaderImage(),
+                            SizedBox(
+                              height: headerHeight,
+                              child: const HeaderImage(),
+                            ),
 
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+                              padding: EdgeInsets.fromLTRB(horizontalPadding, 24, horizontalPadding, 0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     "Welcome Back",
                                     style: TextStyle(
-                                      fontSize: 28,
+                                      fontSize: titleSize,
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),

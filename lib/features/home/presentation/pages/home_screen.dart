@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jobmitra_flutter/core/widgets/category_chip.dart';
 import 'package:jobmitra_flutter/core/widgets/job_card.dart';
 import 'package:jobmitra_flutter/core/widgets/recommended_job_card.dart';
+import 'package:jobmitra_flutter/features/auth/presentation/providers/auth_providers.dart';
+import 'package:jobmitra_flutter/features/auth/presentation/state/auth_state.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
   return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -17,6 +20,29 @@ class HomeScreen extends StatelessWidget {
         actions: [
           Icon(Icons.notifications_none, color: Colors.black87),
           SizedBox(width: 12),
+          PopupMenuButton<String>(
+            icon: Icon(Icons.person, color: Colors.black87, size: 28),
+            onSelected: (String value) {
+              if (value == 'logout') {
+                // Reset auth state and navigate to login
+                ref.read(authViewModelProvider.notifier).state = const AuthState();
+                Navigator.pushReplacementNamed(context, '/login');
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black87, size: 20),
+                    SizedBox(width: 12),
+                    Text('Logout'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 8),
         ],
       ),
       body: Padding(
